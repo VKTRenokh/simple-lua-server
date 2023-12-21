@@ -1,5 +1,7 @@
 local get_headers = require("utils.get-headers")
+local get_content_type = require("utils.get-content-type")
 local get_path = require("utils.get-path")
+local get_file_extension = require("utils.get-file-extension")
 
 local function server(socket)
 	local client = socket:accept()
@@ -11,8 +13,10 @@ local function server(socket)
 	local request = client:receive()
 
 	local path = get_path(request)
+	local extension = get_file_extension(path)
+	local content_type = get_content_type(extension)
 
-	print(path:sub(path:match(".*()%.") + 1))
+	print(content_type)
 
 	local body = "Hello World!"
 
