@@ -10,7 +10,9 @@ local function server(socket)
 
 	local request = client:receive()
 
-	local path = get_path
+	local path = get_path(request)
+
+	print(path:sub(path:match(".*()%.") + 1))
 
 	local body = "Hello World!"
 
